@@ -34,7 +34,7 @@ class _RegisterState extends State<Register> {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 200,
+              height: 150,
             ),
             Theme(
               child: Form(
@@ -155,7 +155,7 @@ class _RegisterState extends State<Register> {
               data: Theme.of(context).copyWith(primaryColor: Color(0xff34456e)),
             ),
             SizedBox(
-              height: 16,
+              height: 40,
             ),
             Theme(
               child: Form(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/const.dart';
 import 'package:movies/data/get_data.dart';
 import 'package:movies/data/movie.dart';
 
@@ -29,29 +30,46 @@ class _MoviesState extends State<Movies> {
         ),
         body: movieList.isEmpty
             ? Center(child: CircularProgressIndicator())
-            : ListView.builder(
+            : ListView.separated(
+                separatorBuilder: (context, i) => Divider(
+                      height: 40,
+                    ),
+                padding: kDefPadding,
                 itemCount: movieList.length,
                 itemBuilder: (context, i) {
-                  return ListTile(
-                    contentPadding: EdgeInsets.all(10),
-                    leading: Image.network(
-                      movieList[i].poster,
-                      fit: BoxFit.fill,
-                    ),
-                    title: Text(movieList[i].title),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Genre: ${movieList[i].genre}"),
-                        Text("Director: ${movieList[i].director.join(",")}"),
-                        Text("Starring: ${movieList[i].stars.join(",")}"),
-                        Text("Languages: ${movieList[i].language}"),
-                        Text(
-                          "${movieList[i].pageViews} views",
-                          style: TextStyle(color: Colors.blue),
-                        )
-                      ],
-                    ),
+                  return Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Image.network(
+                          movieList[i].poster,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 7,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                movieList[i].title,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text("Genre: ${movieList[i].genre}"),
+                              Text(
+                                  "Director: ${movieList[i].director.join(",")}"),
+                              Text("Starring: ${movieList[i].stars.join(",")}"),
+                              Text("Languages: ${movieList[i].language}"),
+                              Text(
+                                "${movieList[i].pageViews} views",
+                                style: TextStyle(color: Colors.blue),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   );
                 }));
   }
